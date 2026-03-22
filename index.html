@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artecom | Kokedamas e Arte Botânica</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #F7E7E4;
+            /* Rosa Quartzo Suave */
+            --details: #E6C7C2;
+            /* Rosa Chá */
+            --text-color: #3B4524;
+            /* Verde Oliva Escuro */
+            --card-bg: #FFFFFF;
+            --font-title: 'Playfair Display', serif;
+            --font-text: 'Montserrat', sans-serif;
+            --shadow: 0 4px 20px rgba(59, 69, 36, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-text);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .brand {
+            font-family: var(--font-title);
+            font-weight: 600;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(247, 231, 228, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--details);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 2.2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            font-weight: 400;
+            font-size: 1.05rem;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            color: #5a6639;
+            text-decoration: underline;
+            text-decoration-color: var(--details);
+            text-underline-offset: 4px;
+        }
+
+        .cart-icon-wrapper {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            transition: var(--transition);
+            font-size: 1.3rem;
+        }
+
+        .cart-icon-wrapper:hover {
+            background-color: var(--details);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background-color: var(--text-color);
+            color: var(--card-bg);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 12rem 5% 8rem;
+            text-align: center;
+            background: linear-gradient(rgba(247, 231, 228, 0.65), rgba(247, 231, 228, 0.98)), url('https://images.unsplash.com/photo-1463320726281-696a485928c7?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero h1 {
+            font-size: 4.2rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            color: #4E5A33;
+        }
+
+        .btn-primary {
+            background-color: var(--text-color);
+            color: var(--card-bg);
+            padding: 1.1rem 2.5rem;
+            border: none;
+            border-radius: 30px;
+            transition: var(--transition);
+            cursor: pointer;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 1.1rem;
+            font-family: var(--font-text);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--text-color);
+            padding: calc(1.1rem - 2px) calc(2.5rem - 2px);
+        }
+
+        /* Produtos (Catálogo) */
+        .products-section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .products-section h2 {
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            font-style: italic;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59, 69, 36, 0.12);
+            border-color: var(--details);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            height: 260px;
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .card:hover .card-img {
+            transform: scale(1.1);
+        }
+
+        .stock-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-color);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+            cursor: pointer;
+        }
+
+        .card p.price {
+            font-weight: 600;
+            color: #5a6639;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .btn-add {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--text-color);
+            padding: 0.8rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: auto;
+            width: 100%;
+            font-family: var(--font-text);
+        }
+
+        .btn-add:hover {
+            background-color: var(--text-color);
+            color: var(--card-bg);
+        }
+
+        .btn-encomendar {
+            background-color: var(--details);
+            color: var(--text-color);
+            border: 2px solid var(--details);
+            padding: 0.8rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: auto;
+            width: 100%;
+            font-family: var(--font-text);
+        }
+
+        .btn-encomendar:hover {
+            background-color: transparent;
+        }
+
+        /* Sobre Nós (Storytelling) */
+        .about-section {
+            background-color: var(--bg-color);
+            padding: 8rem 5%;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-text-block {
+            background-color: var(--card-bg);
+            padding: 4rem;
+            border-radius: 12px;
+            box-shadow: 10px 10px 0px var(--details);
+            border: 1px solid var(--details);
+        }
+
+        .about-text-block h2 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            color: var(--text-color);
+        }
+
+        .about-text-block p {
+            font-size: 1.15rem;
+            margin-bottom: 2rem;
+            color: #444;
+            line-height: 1.9;
+        }
+
+        .values-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .value-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .value-item i {
+            font-size: 1.5rem;
+            color: #6b7a48;
+            width: 30px;
+            text-align: center;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #6b7a48;
+            border-left: 3px solid var(--details);
+            padding-left: 1rem;
+            font-size: 1.1rem;
+            margin-bottom: 0;
+            margin-top: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-color);
+            color: var(--card-bg);
+            padding: 4rem 5% 2rem;
+            text-align: center;
+        }
+
+        .footer-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+
+        .footer-col h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            color: var(--details);
+        }
+
+        .footer-col a.footer-link {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 300;
+            opacity: 0.8;
+            transition: var(--transition);
+            color: var(--card-bg);
+        }
+
+        .footer-col a.footer-link:hover {
+            opacity: 1;
+            color: var(--details);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 1.5rem;
+        }
+
+        .social-icons a {
+            color: var(--card-bg);
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            color: var(--details);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            opacity: 0.6;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* Modal (Janela de Descrição) */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(59, 69, 36, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            z-index: 1050;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: var(--card-bg);
+            border-radius: 12px;
+            max-width: 900px;
+            width: 100%;
+            display: flex;
+            position: relative;
+            transform: translateY(30px);
+            transition: all 0.5s;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal.active .modal-box {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--card-bg);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+            background: var(--bg-color);
+        }
+
+        .modal-img-col {
+            flex: 1;
+        }
+
+        .modal-img-col img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 400px;
+        }
+
+        .modal-info-col {
+            flex: 1.2;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .modal-info-col h3 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        .modal-info-col .modal-price {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #5a6639;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-desc {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        /* Drawer Carrinho Lateral */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1020;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 100%;
+            max-width: 420px;
+            height: 100%;
+            background: var(--card-bg);
+            z-index: 1030;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            transition: right 0.4s;
+        }
+
+        .drawer.active {
+            right: 0;
+        }
+
+        .drawer-header {
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid var(--details);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-header h2 {
+            font-style: italic;
+            font-size: 1.8rem;
+        }
+
+        .close-drawer {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: transform 0.3s;
+        }
+
+        .close-drawer:hover {
+            transform: rotate(90deg);
+        }
+
+        .drawer-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            background: var(--bg-color);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 8px;
+            background: white;
+            border: 1px solid var(--details);
+        }
+
+        .cart-item h4 {
+            font-family: var(--font-text);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .cart-item p {
+            color: #5a6639;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--details);
+            background: var(--card-bg);
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-remove {
+            background: none;
+            border: none;
+            color: #d66464;
+            font-size: 0.85rem;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .drawer-footer {
+            padding: 2rem 1.5rem;
+            border-top: 1px solid var(--details);
+        }
+
+        .subtotal {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-title);
+        }
+
+        .btn-wpp {
+            width: 100%;
+            background: #25D366;
+            border: none;
+            color: white;
+            padding: 1.2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: 0.3s;
+            font-family: var(--font-text);
+        }
+
+        .btn-wpp:hover {
+            background: #1ebd5a;
+        }
+
+        /* Responsividade Mobile */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero {
+                padding: 8rem 5% 5rem;
+            }
+
+            .modal-box {
+                flex-direction: column;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .modal-img-col {
+                height: 280px;
+            }
+
+            .modal-info-col {
+                padding: 2rem 1.5rem;
+            }
+
+            .drawer {
+                width: 90%;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-img img {
+                height: 400px;
+            }
+
+            .about-text-block {
+                padding: 2.5rem 1.5rem;
+                box-shadow: 5px 5px 0px var(--details);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER / MENU -->
+    <header>
+        <a href="#home" class="brand">Artecom</a>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#sobre">Sobre Nós</a></li>
+            </ul>
+        </nav>
+        <div class="cart-icon-wrapper" id="btn-cart">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="cart-badge" id="cart-qty">0</span>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <h1>Artecom: A Natureza Suspensa em Arte</h1>
+        <p>A união perfeita entre o minimalismo zen e a botânica. Kokedamas enlaçadas artesanalmente para envolver seu
+            ambiente de vida.</p>
+        <a href="#produtos" class="btn-primary">Explorar Botânica</a>
+    </section>
+
+    <!-- CATÁLOGO DE PRODUTOS / ESTOQUE DINÂMICO -->
+    <section class="products-section" id="produtos">
+        <h2>Coleção Natural</h2>
+        <div class="grid" id="product-grid"></div>
+    </section>
+
+    <!-- ABA SOBRE NÓS (STORYTELLING) -->
+    <section class="about-section" id="sobre">
+        <div class="about-grid">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?q=80&w=800&auto=format&fit=crop"
+                    alt="Mãos moldando planta" loading="lazy">
+            </div>
+            <div class="about-text-block">
+                <h2>Artecom: Onde a Natureza encontra a Arte</h2>
+                <p>Nascemos do profundo desejo urbano de resgatar o contato diário com o mundo natural. Em um ateliê
+                    movido a paixão, utilizamos antigas tradições japonesas enraizadas na técnica da Kokedama (bola de
+                    musgo), desenvolvendo arranjos botânicos que dispensam quaisquer vasos sintéticos. Criamos, com
+                    isso, verdadeiras esculturas orgânicas e vivas.</p>
+                <div class="values-list">
+                    <div class="value-item"><i class="fa-solid fa-hand-holding-heart"></i><span>Feito meticulosamente à
+                            mão</span></div>
+                    <div class="value-item"><i class="fa-solid fa-leaf"></i><span>Sustentabilidade em cada fio</span>
+                    </div>
+                    <div class="value-item"><i class="fa-solid fa-gem"></i><span>Design completamente exclusivo</span>
+                    </div>
+                </div>
+                <a href="#produtos" class="btn-primary"
+                    style="margin-bottom:1rem; width: 100%; text-align: center;">Conheça nossa Coleção</a>
+                <p class="quote">"Plantar um jardim é acreditar no amanhã. Nossa arte é o respiro que seu lar exige."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RODAPÉ COMPACTO -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col" style="flex: 1; max-width: 300px;">
+                <span class="brand" style="color:var(--card-bg); display: block; margin-bottom: 1rem;">Artecom</span>
+                <p style="font-weight: 300; opacity: 0.8;">A botânica não apenas decora um ambiente, ela transforma a
+                    maneira como o ocupamos.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Atendimento Direto</h4>
+                <a href="https://wa.me/5511999999999" target="_blank" class="footer-link"><i
+                        class="fa-brands fa-whatsapp"></i> Suporte via WhatsApp</a>
+            </div>
+            <div class="footer-col">
+                <h4>Nossas Redes</h4>
+                <div class="social-icons">
+                    <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" title="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">Copyright &copy; 2026 Artecom. Todos os direitos reservados.</div>
+    </footer>
+
+    <!-- CARRINHO LATERAL -->
+    <div class="drawer-overlay" id="cart-overlay"></div>
+    <div class="drawer" id="drawer">
+        <div class="drawer-header">
+            <h2>Seu Carrinho</h2>
+            <button class="close-drawer" id="close-drawer"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="drawer-items" id="cart-content"></div>
+        <div class="drawer-footer">
+            <div class="subtotal"><span>Total Estimado</span><span id="cart-total-value">R$ 0,00</span></div>
+            <button class="btn-wpp" id="btn-checkout"><i class="fa-brands fa-whatsapp"></i> Finalizar Pedido</button>
+        </div>
+    </div>
+
+    <!-- MODAL DE PRODUTOS -->
+    <div class="modal" id="modal">
+        <div class="modal-box">
+            <button class="close-modal" id="btn-close-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-img-col"><img src="" id="mod-img" loading="lazy"></div>
+            <div class="modal-info-col">
+                <h3 id="mod-name">Kokedama Nome</h3>
+                <p class="modal-price" id="mod-price">R$ 0,00</p>
+                <div class="modal-desc" id="mod-desc">Descrição, cuidados e significado completo da planta no Modal.
+                </div>
+                <button class="btn-primary" id="mod-add"
+                    style="border-radius:30px; margin-top: auto; width: 100%;">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // BANCO DE DADOS DINÂMICO DE ESTOQUE E ITENS
+        const estoque = [
+            { id: 1, nome: 'Kokedama de Jiboia', preco: 65, estoque: 2, descricao: 'A Jiboia purifica ativamente o ar e gosta de luz indireta moderada. Sua folhagem pendente luxuosa traz fluidez as paredes e decorações de cima da casa.', imagem: 'https://images.unsplash.com/photo-1596547609652-9fc5d8d428ce?q=80&w=800&auto=format&fit=crop' },
+            { id: 2, nome: 'Antúrio Rosa', preco: 85, estoque: 2, descricao: 'Traz o estilo romântico botânico. As brácteas em tons de rosa chá dão um requinte incomparável em mesas de jantar. Gosta de ambientes úmidos e quentes.', imagem: 'https://images.unsplash.com/photo-1591823199859-9941bd5a4970?q=80&w=800&auto=format&fit=crop' },
+            { id: 3, nome: 'Orquídea Phalaenopsis', preco: 130, estoque: 2, descricao: 'A majestade em orquídeas. A bola de musgo reproduz sua fixação original de tronco de árvore, tornando esta floração eterna extremamente saudável.', imagem: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?q=80&w=800&auto=format&fit=crop' },
+            { id: 4, nome: 'Kokedama Aspargo Pluma', preco: 55, estoque: 1, descricao: 'Misteriosa textura de nuvem verde. Agradável ao toque, ele prospera ao borrifo frequente de água matinal. Simboliza calma orgânica.', imagem: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?q=80&w=800&auto=format&fit=crop' },
+            { id: 5, nome: 'Espada de São Jorge', preco: 60, estoque: 1, descricao: 'União da rusticidade com energias de proteção da casa. A planta mais forte conhecida por crescer com altivez, independentemente das condições.', imagem: 'https://images.unsplash.com/photo-1598531405021-954f9a039750?q=80&w=800&auto=format&fit=crop' },
+            { id: 6, nome: 'Samambaia Havaiana', preco: 75, estoque: 3, descricao: 'Para amantes de florestas densas em miniatura. Microfolhas que desenham uma copa exótica incrível. Necessita de bastante sombra refrescante.', imagem: 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=800&auto=format&fit=crop' },
+            { id: 7, nome: 'Suculenta Echeveria', preco: 45, estoque: 3, descricao: 'Sua forma reflete geometrias perfeitas da evolução natural em mandala. Suporta negligência com regas, mas exige seu carinho dando muito sol.', imagem: 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?q=80&w=800&auto=format&fit=crop' },
+            { id: 8, nome: 'Lírio da Paz', preco: 80, estoque: 1, descricao: 'A planta que se cursa para purificar todo o campo enérgico exalado pelas grandes cidades. Sobrevive brilhantemente apenas com as luzes limpas de um quarto.', imagem: 'https://images.unsplash.com/photo-1620120966967-df5e121a8d00?q=80&w=800&auto=format&fit=crop' }
+        ];
+
+        const formatBRL = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const wappPhone = "5511999999999";
+
+        // INJEÇÃO DO CATÁLOGO E LÓGICA DE ESTOQUE
+        const grid = document.getElementById('product-grid');
+        estoque.forEach(item => {
+            const hasStock = item.estoque > 0;
+            const btnClass = hasStock ? 'btn-add' : 'btn-encomendar';
+            const btnText = hasStock ? 'Adicionar ao Carrinho' : '<i class="fa-brands fa-whatsapp"></i> Encomendar';
+            const badge = hasStock ? `<span class="stock-badge">Em estoque: ${item.estoque}</span>` : `<span class="stock-badge" style="color:#d66464">Esgotado</span>`;
+
+            grid.innerHTML += `
+                <div class="card">
+                    <div class="card-img-wrapper" onclick="openModal(${item.id})">
+                        ${badge}
+                        <img src="${item.imagem}" class="card-img" loading="lazy">
+                    </div>
+                    <h3 onclick="openModal(${item.id})">${item.nome}</h3>
+                    <p class="price">${formatBRL(item.preco)}</p>
+                    <button class="${btnClass}" onclick="handleBtn(${item.id})">${btnText}</button>
+                </div>
+            `;
+        });
+
+        // ACTIONS DINÂMICAS DE COMPRA / ENCOMENDA
+        window.handleBtn = (id) => {
+            const prod = estoque.find(i => i.id === id);
+            if (prod.estoque > 0) {
+                addToCart(prod.id);
+            } else {
+                const msg = `Olá, Artecom! Vi que a planta [${prod.nome}] está sem estoque, gostaria de encomendar uma. Como funciona o prazo?`;
+                window.open(`https://wa.me/${wappPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+            }
+        };
+
+        // LÓGICA DO MODAL
+        const modal = document.getElementById('modal');
+        const mAddBtn = document.getElementById('mod-add');
+        let actItem = null;
+
+        window.openModal = (id) => {
+            const prod = estoque.find(i => i.id === id);
+            if (!prod) return;
+            actItem = prod;
+            document.getElementById('mod-img').src = prod.imagem;
+            document.getElementById('mod-name').innerText = prod.nome;
+            document.getElementById('mod-price').innerText = formatBRL(prod.preco);
+            document.getElementById('mod-desc').innerText = prod.descricao;
+
+            if (prod.estoque > 0) {
+                mAddBtn.className = "btn-primary"; mAddBtn.innerText = "Adicionar ao Carrinho";
+                mAddBtn.style.backgroundColor = "var(--text-color)"; mAddBtn.style.color = "var(--card-bg)";
+            } else {
+                mAddBtn.className = "btn-primary";
+                mAddBtn.style.backgroundColor = "var(--details)"; mAddBtn.style.color = "var(--text-color)";
+                mAddBtn.innerHTML = "<i class='fa-brands fa-whatsapp'></i> Encomendar";
+            }
+            modal.classList.add('active'); document.body.style.overflow = 'hidden';
+        };
+
+        const closeModal = () => { modal.classList.remove('active'); document.body.style.overflow = ''; };
+        document.getElementById('btn-close-modal').addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+        mAddBtn.addEventListener('click', () => { handleBtn(actItem.id); closeModal(); });
+
+        // CARRINHO DE COMPRAS E CÁLCULO
+        let cart = [];
+        const drawer = document.getElementById('drawer');
+        const drwOverlay = document.getElementById('cart-overlay');
+        const setDrawer = (show) => {
+            if (show) { drawer.classList.add('active'); drwOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+            else { drawer.classList.remove('active'); drwOverlay.classList.remove('active'); if (!modal.classList.contains('active')) document.body.style.overflow = ''; }
+        };
+
+        document.getElementById('btn-cart').addEventListener('click', () => setDrawer(true));
+        document.getElementById('close-drawer').addEventListener('click', () => setDrawer(false));
+        drwOverlay.addEventListener('click', () => setDrawer(false));
+
+        const addToCart = (id) => {
+            const prod = estoque.find(p => p.id === id);
+            const inCart = cart.find(i => i.id === id);
+            if (inCart) {
+                if (inCart.qty < prod.estoque) inCart.qty++;
+                else alert(`Temos apenas ${prod.estoque} unidades disponíveis!`);
+            } else {
+                cart.push({ ...prod, qty: 1 });
+            }
+            renderCart();
+            // Pequeno feedback de UX na tela (opcional)
+        };
+
+        window.updQty = (id, delta) => {
+            const prod = estoque.find(p => p.id === id);
+            const inCart = cart.find(i => i.id === id);
+            if (delta > 0 && inCart.qty >= prod.estoque) return alert(`Apenas ${prod.estoque} no estoque.`);
+            inCart.qty += delta;
+            if (inCart.qty <= 0) cart = cart.filter(i => i.id !== id);
+            renderCart();
+        };
+
+        const renderCart = () => {
+            let total = 0, count = 0;
+            const container = document.getElementById('cart-content');
+            container.innerHTML = '';
+
+            if (cart.length === 0) { container.innerHTML = '<p style="text-align:center;color:#888; margin-top: 2rem;">Sua sacola artesanal está vazia.</p>'; }
+            else {
+                cart.forEach(item => {
+                    total += item.preco * item.qty; count += item.qty;
+                    container.innerHTML += `
+                        <div class="cart-item">
+                            <div style="flex:1">
+                                <h4>${item.nome}</h4><p>${formatBRL(item.preco)}</p>
+                                <button class="btn-remove" onclick="updQty(${item.id}, -999)">Remover Item</button>
+                            </div>
+                            <div class="qty-controls">
+                                <button class="qty-btn" onclick="updQty(${item.id}, -1)">-</button>
+                                <span>${item.qty}</span>
+                                <button class="qty-btn" onclick="updQty(${item.id}, 1)">+</button>
+                            </div>
+                        </div>`;
+                });
+            }
+            document.getElementById('cart-total-value').innerText = formatBRL(total);
+            document.getElementById('cart-qty').innerText = count;
+            document.getElementById('cart-qty').style.display = count > 0 ? 'flex' : 'none';
+        };
+
+        // CHECKOUT RÁPIDO WHATSAPP
+        document.getElementById('btn-checkout').addEventListener('click', () => {
+            if (cart.length === 0) return alert('Selecione ao menos uma de nossas plantas para sua casa.');
+            let itemsStr = cart.map(i => `${i.nome} (${i.qty}x)`).join(', ');
+            let total = cart.reduce((acc, i) => acc + (i.preco * i.qty), 0);
+            let msg = `Olá, Artecom! Tudo bem? Gostaria de encomendar: ${itemsStr}. O total calculado é ${formatBRL(total)}. Como procedemos com a entrega?`;
+            window.open(`https://wa.me/${wappPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+        });
+
+        // Initialize UI
+        renderCart();
+    </script>
+</body>
+
+</html>
